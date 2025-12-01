@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitnessDawg | Oversized Activewear</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <img src="logo.jpeg" alt="FitnessDawg Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#register">Register</a></li>
+                <li><a href="#cart">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Video Background -->
+    <section id="home" class="hero">
+        <video autoplay muted loop id="bg-video">
+            <source src="FitnessDawg-video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-text">
+            <h1>Welcome to FitnessDawg</h1>
+            <p>Train Hard. Look Good. Stay Comfortable.</p>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section id="products" class="products">
+        <h2>Our Oversized Collection</h2>
+        <p>Engineered for comfort and movement — FitnessDawg oversized activewear keeps you confident in and out of the gym.</p>
+
+        <div class="product-grid">
+            <div class="product">
+                <img src="OsHoodie_black.jpeg" alt="Oversized Black Hoodie">
+                <h3>Oversized Black Hoodie</h3>
+                <p>Made from premium cotton fleece, this oversized hoodie offers relaxed comfort and effortless streetwear style. Available in S, M, L, XL.</p>
+                <p class="price">$129.99</p>
+                <button onclick="addToCart('Oversized Black Hoodie', 129.99)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="OsHoodie_grey.jpeg" alt="Oversized Grey Hoodie">
+                <h3>Oversized Grey Hoodie</h3>
+                <p>Stay cozy and stylish with our grey oversized hoodie — perfect for layering or lounging. FitnessDawg logo embroidered on chest. Sizes S, M, L, XL.</p>
+                <p class="price">$189.99</p>
+                <button onclick="addToCart('Oversized Grey Hoodie', 189.99)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="Trackpant_black.jpeg" alt="Oversized Black Track Pants">
+                <h3>Oversized Black Track Pants</h3>
+                <p>Relaxed-fit black track pants crafted for comfort and mobility. Tapered ankles and elastic waistband make them perfect for gym or casual wear. Sizes S, M, L, XL.</p>
+                <p class="price">$79.99</p>
+                <button onclick="addToCart('Oversized Black Track Pants', 79.99)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="Trackpant_grey.jpeg" alt="Oversized Grey Track Pants">
+                <h3>Oversized Grey Track Pants</h3>
+                <p>Soft and breathable oversized grey track pants designed for all-day wear. Minimalist FitnessDawg branding for a clean look. Sizes S, M, L, XL.</p>
+                <p class="price">$99.99</p>
+                <button onclick="addToCart('Oversized Grey Track Pants', 99.99)">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About FitnessDawg</h2>
+        <p>At FitnessDawg, we believe fitness is more than a lifestyle — it's an attitude. 
+        Our mission is to create clothing that empowers you to perform at your best while 
+        feeling confident in your look. Designed by athletes, for athletes.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form onsubmit="return validateForm()">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <p id="form-message"></p>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" class="register">
+        <h2>Create Your FitnessDawg Account</h2>
+        <p>Join the pack for drops, exclusive offers, and oversized comfort.</p>
+
+        <div id="reg-message"></div>
+
+        <form id="registrationForm" onsubmit="return registerUser()">
+            <div class="form-row">
+                <input type="text" id="firstName" placeholder="First Name *" required>
+                <input type="text" id="lastName" placeholder="Last Name *" required>
+            </div>
+
+            <div class="form-row">
+                <input type="email" id="regEmail" placeholder="Email *" required>
+                <input type="tel" id="phone" placeholder="Phone (optional)">
+            </div>
+
+            <div class="form-row">
+                <input type="password" id="password" placeholder="Password *" required>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password *" required>
+            </div>
+
+            <div class="form-row">
+                <select id="goal">
+                    <option value="">Fitness Goal (optional)</option>
+                    <option value="bulk">Bulk &amp; Strength</option>
+                    <option value="cut">Cut &amp; Lean</option>
+                    <option value="performance">Performance</option>
+                    <option value="lifestyle">Lifestyle &amp; Comfort</option>
+                </select>
+
+                <select id="size">
+                    <option value="">Preferred Size</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                </select>
+            </div>
+
+            <input type="text" id="address" placeholder="Street Address">
+
+            <div class="form-row">
+                <input type="text" id="city" placeholder="City">
+                <input type="text" id="province" placeholder="Province (e.g. BC)">
+                <input type="text" id="postal" placeholder="Postal Code">
+            </div>
+
+            <label class="checkbox-line">
+                <input type="checkbox" id="terms" required>
+                I agree to the FitnessDawg Terms &amp; Conditions
+            </label>
+
+            <button type="submit">Create Account</button>
+        </form>
+    </section>
+
+    <!-- Cart Section -->
+    <section id="cart" class="cart">
+        <h2>Your Cart</h2>
+        <ul id="cart-list"></ul>
+        <p id="total">Total: $0</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 FitnessDawg. Built By Group 10.</p>
+    </footer>
+
+    <!-- Discount Popup -->
+    <div id="discount-popup" class="popup-overlay">
+        <div class="popup-box">
+            <button class="close-btn" onclick="closePopup()">×</button>
+            <h2>Special Discount!</h2>
+            <p>Get 20% OFF on your first order.</p>
+            <button class="claim-btn" onclick="closePopup()">Claim Offer</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
