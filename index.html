@@ -3,30 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FitnessDawg - Premium oversized activewear including hoodies and track pants. Train Hard. Look Good. Stay Comfortable.">
+    <meta name="keywords" content="fitness, activewear, hoodies, track pants, oversized clothing, gym wear, athletic apparel, FitnessDawg">
     <title>FitnessDawg | Oversized Activewear</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header Section -->
     <header>
-        <img src="logo.jpeg" alt="FitnessDawg Logo" class="logo">
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#register">Register</a></li>
-                <li><a href="#cart">Cart</a></li>
+        <div class="header-left">
+            <nav class="nav-main">
+                <ul>
+                    <li><a href="#products" onclick="event.preventDefault(); showGender('men');">Men</a></li>
+                    <li><a href="#women" onclick="event.preventDefault(); showGender('women');">Women</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-center">
+            <img src="images/logo.jpeg" alt="FitnessDawg Logo" class="logo" onclick="window.location.href='#home'">
+        </div>
+        <div class="header-right">
+            <div class="nav-search">
+                <input type="text" id="search-input" placeholder="What are you looking for today...">
+                <button class="search-btn" onclick="var input = document.getElementById('search-input'); if(input.value.trim()) { searchProducts(); } else { input.focus(); }" title="Search">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+            <ul class="nav-icons">
+                <li><a href="pages/wishlist.html" class="icon-link" title="Wishlist">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </a></li>
+                <li><a href="pages/login.html" class="icon-link" title="Account">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a></li>
+                <li><a href="pages/cart.html" class="icon-link cart-icon" title="Cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span id="cart-count">0</span>
+                </a></li>
             </ul>
-        </nav>
+        </div>
     </header>
 
-    <!-- Hero Section with Video Background -->
+    <main class="main-content">
+    <!-- Hero Section with Image Background -->
     <section id="home" class="hero">
-        <video autoplay muted loop id="bg-video">
-            <source src="FitnessDawg-video.mp4" type="video/mp4">
-        </video>
+        <div class="hero-background"></div>
         <div class="hero-text">
             <h1>Welcome to FitnessDawg</h1>
             <p>Train Hard. Look Good. Stay Comfortable.</p>
@@ -35,43 +68,191 @@
 
     <!-- Product Section -->
     <section id="products" class="products">
-        <h2>Our Oversized Collection</h2>
+        <h2>Men's Collection</h2>
         <p>Engineered for comfort and movement — FitnessDawg oversized activewear keeps you confident in and out of the gym.</p>
 
-        <div class="product-grid">
-            <div class="product">
-                <img src="OsHoodie_black.jpeg" alt="Oversized Black Hoodie">
+        <!-- Category Cards -->
+        <div class="category-cards" id="category-cards">
+            <div class="category-card" onclick="showCategoryProducts('hoodie')">
+                <div class="category-card-image">
+                    <img src="images/OsHoodie_black.jpeg" alt="Hoodies">
+                </div>
+                <div class="category-card-content">
+                    <h3>HOODIES</h3>
+                    <p>Explore our collection of oversized hoodies</p>
+                    <button class="category-card-btn">View Collection</button>
+                </div>
+            </div>
+
+            <div class="category-card" onclick="showCategoryProducts('track')">
+                <div class="category-card-image">
+                    <img src="images/Trackpant_black.jpeg" alt="Track Pants">
+                </div>
+                <div class="category-card-content">
+                    <h3>TRACK PANTS</h3>
+                    <p>Discover our range of oversized track pants</p>
+                    <button class="category-card-btn">View Collection</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Grid (Hidden by default, shown when category is clicked) -->
+        <div class="product-grid" id="product-grid" style="display:none;">
+            <button class="back-to-categories" onclick="showCategoryCards()">← Back to Categories</button>
+            <div class="product" data-category="hoodie" data-name="Oversized Black Hoodie" data-price="129.99" data-image="images/OsHoodie_black.jpeg">
+                <img src="images/OsHoodie_black.jpeg" alt="Oversized Black Hoodie" onclick="showProductImage('images/OsHoodie_black.jpeg')">
                 <h3>Oversized Black Hoodie</h3>
                 <p>Made from premium cotton fleece, this oversized hoodie offers relaxed comfort and effortless streetwear style. Available in S, M, L, XL.</p>
                 <p class="price">$129.99</p>
-                <button onclick="addToCart('Oversized Black Hoodie', 129.99)">Add to Cart</button>
+                <div class="product-actions">
+                    <button onclick="addToCart('Oversized Black Hoodie', 129.99, 'images/OsHoodie_black.jpeg')">Add to Cart</button>
+                    <button class="wishlist-btn" onclick="addToWishlist('Oversized Black Hoodie', 129.99, 'images/OsHoodie_black.jpeg')" title="Add to Wishlist">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
 
-            <div class="product">
-                <img src="OsHoodie_grey.jpeg" alt="Oversized Grey Hoodie">
+            <div class="product" data-category="hoodie" data-name="Oversized Grey Hoodie" data-price="189.99" data-image="images/OsHoodie_grey.jpeg">
+                <img src="images/OsHoodie_grey.jpeg" alt="Oversized Grey Hoodie" onclick="showProductImage('images/OsHoodie_grey.jpeg')">
                 <h3>Oversized Grey Hoodie</h3>
                 <p>Stay cozy and stylish with our grey oversized hoodie — perfect for layering or lounging. FitnessDawg logo embroidered on chest. Sizes S, M, L, XL.</p>
                 <p class="price">$189.99</p>
-                <button onclick="addToCart('Oversized Grey Hoodie', 189.99)">Add to Cart</button>
+                <div class="product-actions">
+                    <button onclick="addToCart('Oversized Grey Hoodie', 189.99, 'images/OsHoodie_grey.jpeg')">Add to Cart</button>
+                    <button class="wishlist-btn" onclick="addToWishlist('Oversized Grey Hoodie', 189.99, 'images/OsHoodie_grey.jpeg')" title="Add to Wishlist">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
 
-            <div class="product">
-                <img src="Trackpant_black.jpeg" alt="Oversized Black Track Pants">
+            <div class="product" data-category="track" data-name="Oversized Black Track Pants" data-price="79.99" data-image="images/Trackpant_black.jpeg">
+                <img src="images/Trackpant_black.jpeg" alt="Oversized Black Track Pants" onclick="showProductImage('images/Trackpant_black.jpeg')">
                 <h3>Oversized Black Track Pants</h3>
                 <p>Relaxed-fit black track pants crafted for comfort and mobility. Tapered ankles and elastic waistband make them perfect for gym or casual wear. Sizes S, M, L, XL.</p>
                 <p class="price">$79.99</p>
-                <button onclick="addToCart('Oversized Black Track Pants', 79.99)">Add to Cart</button>
+                <div class="product-actions">
+                    <button onclick="addToCart('Oversized Black Track Pants', 79.99, 'images/Trackpant_black.jpeg')">Add to Cart</button>
+                    <button class="wishlist-btn" onclick="addToWishlist('Oversized Black Track Pants', 79.99, 'images/Trackpant_black.jpeg')" title="Add to Wishlist">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
 
-            <div class="product">
-                <img src="Trackpant_grey.jpeg" alt="Oversized Grey Track Pants">
+            <div class="product" data-category="track" data-name="Oversized Grey Track Pants" data-price="99.99" data-image="images/Trackpant_grey.jpeg">
+                <img src="images/Trackpant_grey.jpeg" alt="Oversized Grey Track Pants" onclick="showProductImage('images/Trackpant_grey.jpeg')">
                 <h3>Oversized Grey Track Pants</h3>
                 <p>Soft and breathable oversized grey track pants designed for all-day wear. Minimalist FitnessDawg branding for a clean look. Sizes S, M, L, XL.</p>
                 <p class="price">$99.99</p>
-                <button onclick="addToCart('Oversized Grey Track Pants', 99.99)">Add to Cart</button>
+                <div class="product-actions">
+                    <button onclick="addToCart('Oversized Grey Track Pants', 99.99, 'images/Trackpant_grey.jpeg')">Add to Cart</button>
+                    <button class="wishlist-btn" onclick="addToWishlist('Oversized Grey Track Pants', 99.99, 'images/Trackpant_grey.jpeg')" title="Add to Wishlist">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-    </section>
+<!-- ================= WOMEN SECTION ================= -->
+<section id="women" class="products">
+    <h2>Women’s Collection</h2>
+    <p>Engineered for comfort, movement and confidence in and out of the gym.</p>
+
+    <!-- Category Cards -->
+    <div class="category-cards" id="women-category-cards">
+        <div class="category-card" onclick="showWomenCategoryProducts('women-shorts')">
+            <div class="category-card-image">
+                <img src="images/shorts-black.png" alt="Shorts">
+            </div>
+            <div class="category-card-content">
+                <h3>SHORTS</h3>
+                <p>High-waisted FITNESSDAWG shorts for maximum mobility and comfort.</p>
+                <button class="category-card-btn">View Collection</button>
+            </div>
+        </div>
+
+        <div class="category-card" onclick="showWomenCategoryProducts('women-hoodie')">
+            <div class="category-card-image">
+                <img src="images/cropped-hoodie-black.png" alt="Cropped Hoodie">
+            </div>
+            <div class="category-card-content">
+                <h3>CROPPED HOODIE</h3>
+                <p>Premium cropped hoodie designed for comfort and flexibility.</p>
+                <button class="category-card-btn">View Collection</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Grid (Hidden by default, shown when category is clicked) -->
+    <div class="product-grid" id="women-product-grid" style="display:none;">
+        <button class="back-to-categories" onclick="showWomenCategoryCards()">← Back to Categories</button>
+        <div class="product" data-category="women-shorts" data-name="Women's Training Shorts - Black" data-price="49.99" data-image="images/shorts-black.png">
+            <img src="images/shorts-black.png" alt="Women's Training Shorts - Black" onclick="showProductImage('images/shorts-black.png')">
+            <h3>Women's Training Shorts – Black</h3>
+            <p>High-waisted black shorts with a compressive fit for max mobility.</p>
+            <p class="price">$49.99</p>
+            <div class="product-actions">
+                <button onclick="addToCart('Women\'s Training Shorts - Black', 49.99, 'images/shorts-black.png')">Add to Cart</button>
+                <button class="wishlist-btn" onclick="addToWishlist('Women\'s Training Shorts - Black', 49.99, 'images/shorts-black.png')" title="Add to Wishlist">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="product" data-category="women-shorts" data-name="Women's Training Shorts - Grey" data-price="49.99" data-image="images/shorts-grey.png">
+            <img src="images/shorts-grey.png" alt="Women's Training Shorts - Grey" onclick="showProductImage('images/shorts-grey.png')">
+            <h3>Women's Training Shorts – Grey</h3>
+            <p>Same performance fit in a clean grey colourway.</p>
+            <p class="price">$49.99</p>
+            <div class="product-actions">
+                <button onclick="addToCart('Women\'s Training Shorts - Grey', 49.99, 'images/shorts-grey.png')">Add to Cart</button>
+                <button class="wishlist-btn" onclick="addToWishlist('Women\'s Training Shorts - Grey', 49.99, 'images/shorts-grey.png')" title="Add to Wishlist">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="product" data-category="women-hoodie" data-name="Women's Cropped Hoodie - Black" data-price="89.99" data-image="images/cropped-hoodie-black.png">
+            <img src="images/cropped-hoodie-black.png" alt="Women's Cropped Hoodie - Black" onclick="showProductImage('images/cropped-hoodie-black.png')">
+            <h3>Women's Cropped Hoodie – Black</h3>
+            <p>Soft black cropped hoodie, perfect for warming up or rest days.</p>
+            <p class="price">$89.99</p>
+            <div class="product-actions">
+                <button onclick="addToCart('Women\'s Cropped Hoodie - Black', 89.99, 'images/cropped-hoodie-black.png')">Add to Cart</button>
+                <button class="wishlist-btn" onclick="addToWishlist('Women\'s Cropped Hoodie - Black', 89.99, 'images/cropped-hoodie-black.png')" title="Add to Wishlist">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="product" data-category="women-hoodie" data-name="Women's Cropped Hoodie - Grey" data-price="89.99" data-image="images/grey-cropped-hoodie.png">
+            <img src="images/grey-cropped-hoodie.png" alt="Women's Cropped Hoodie - Grey" onclick="showProductImage('images/grey-cropped-hoodie.png')">
+            <h3>Women's Cropped Hoodie – Grey</h3>
+            <p>Light grey option for a softer, minimalist look.</p>
+            <p class="price">$89.99</p>
+            <div class="product-actions">
+                <button onclick="addToCart('Women\'s Cropped Hoodie - Grey', 89.99, 'images/grey-cropped-hoodie.png')">Add to Cart</button>
+                <button class="wishlist-btn" onclick="addToWishlist('Women\'s Cropped Hoodie - Grey', 89.99, 'images/grey-cropped-hoodie.png')" title="Add to Wishlist">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- About Section -->
     <section id="about" class="about">
@@ -80,100 +261,100 @@
         Our mission is to create clothing that empowers you to perform at your best while 
         feeling confident in your look. Designed by athletes, for athletes.</p>
     </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2>Contact Us</h2>
-        <form onsubmit="return validateForm()">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="email" id="email" placeholder="Your Email" required>
-            <textarea id="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        <p id="form-message"></p>
-    </section>
-
-    <!-- Registration Section -->
-    <section id="register" class="register">
-        <h2>Create Your FitnessDawg Account</h2>
-        <p>Join the pack for drops, exclusive offers, and oversized comfort.</p>
-
-        <div id="reg-message"></div>
-
-        <form id="registrationForm" onsubmit="return registerUser()">
-            <div class="form-row">
-                <input type="text" id="firstName" placeholder="First Name *" required>
-                <input type="text" id="lastName" placeholder="Last Name *" required>
-            </div>
-
-            <div class="form-row">
-                <input type="email" id="regEmail" placeholder="Email *" required>
-                <input type="tel" id="phone" placeholder="Phone (optional)">
-            </div>
-
-            <div class="form-row">
-                <input type="password" id="password" placeholder="Password *" required>
-                <input type="password" id="confirmPassword" placeholder="Confirm Password *" required>
-            </div>
-
-            <div class="form-row">
-                <select id="goal">
-                    <option value="">Fitness Goal (optional)</option>
-                    <option value="bulk">Bulk &amp; Strength</option>
-                    <option value="cut">Cut &amp; Lean</option>
-                    <option value="performance">Performance</option>
-                    <option value="lifestyle">Lifestyle &amp; Comfort</option>
-                </select>
-
-                <select id="size">
-                    <option value="">Preferred Size</option>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                    <option value="XXL">XXL</option>
-                </select>
-            </div>
-
-            <input type="text" id="address" placeholder="Street Address">
-
-            <div class="form-row">
-                <input type="text" id="city" placeholder="City">
-                <input type="text" id="province" placeholder="Province (e.g. BC)">
-                <input type="text" id="postal" placeholder="Postal Code">
-            </div>
-
-            <label class="checkbox-line">
-                <input type="checkbox" id="terms" required>
-                I agree to the FitnessDawg Terms &amp; Conditions
-            </label>
-
-            <button type="submit">Create Account</button>
-        </form>
-    </section>
-
-    <!-- Cart Section -->
-    <section id="cart" class="cart">
-        <h2>Your Cart</h2>
-        <ul id="cart-list"></ul>
-        <p id="total">Total: $0</p>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 FitnessDawg. Built By Group 10.</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>FitnessDawg</h3>
+                <p>Train Hard. Look Good. Stay Comfortable.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Payment Methods</h3>
+                <div class="payment-methods">
+                    <span class="payment-method">Visa</span>
+                    <span class="payment-method">Mastercard</span>
+                    <span class="payment-method">Amex</span>
+                    <span class="payment-method">PayPal</span>
+                    <span class="payment-method">Apple Pay</span>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://www.pinterest.com/" target="_blank" rel="noopener noreferrer" class="social-icon" title="Pinterest">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.84 3.01 8.97 7.26 10.63-.1-.94-.19-2.4.04-3.44.17-.73 1.1-4.66 1.1-4.66s-.28-.56-.28-1.38c0-1.29.75-2.26 1.68-2.26.79 0 1.17.59 1.17 1.3 0 .79-.5 1.97-.76 3.07-.22.92.46 1.67 1.37 1.67 1.64 0 2.91-1.73 2.91-4.23 0-2.21-1.59-3.76-3.86-3.76-2.63 0-4.18 1.97-4.18 4.01 0 .78.3 1.62.68 2.09.08.09.09.17.07.27l-.28 1.11c-.04.16-.13.2-.3.12-1.12-.52-1.82-2.15-1.82-3.46 0-2.83 2.06-5.43 5.94-5.43 3.12 0 5.54 2.22 5.54 5.19 0 3.1-1.95 5.59-4.66 5.59-.91 0-1.77-.47-2.06-1.08l-.56 2.14c-.21.81-.78 1.83-1.16 2.45.88.27 1.81.42 2.76.42 5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="social-icon" title="X (Twitter)">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="social-icon" title="Facebook">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="social-icon" title="YouTube">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </a>
+                    <a href="https://discord.com/" target="_blank" rel="noopener noreferrer" class="social-icon" title="Discord">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928-1.793 6.4-1.793 10.28 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                  
+
+ <li><a href="pages/About.html">About</a></li>
+
+                    <li><a href="pages/contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="footer-year">2025</span> FitnessDawg. Last Updated: <span id="footer-date"></span> | Built By Group 10.</p>
+            <div class="image-credits">
+                <p><small>Image Credits: Product images by FitnessDawg. Logo design by Group 10.</small></p>
+            </div>
+        </div>
     </footer>
 
-    <!-- Discount Popup -->
-    <div id="discount-popup" class="popup-overlay">
-        <div class="popup-box">
-            <button class="close-btn" onclick="closePopup()">×</button>
-            <h2>Special Discount!</h2>
-            <p>Get 20% OFF on your first order.</p>
-            <button class="claim-btn" onclick="closePopup()">Claim Offer</button>
-        </div>
+    <!-- Product Image Popup -->
+<div id="image-popup" class="image-popup-overlay" onclick="closeImagePopup()">
+    <div class="popup-box">
+        <span class="close-image-popup" onclick="closeImagePopup()">&times;</span>
+        <img id="popup-image" src="" alt="Product Image">
     </div>
+</div>
 
-    <script src="script.js"></script>
+<!-- Discount Popup -->
+<div id="discount-popup" class="popup-overlay">
+    <div class="popup-box">
+        <button class="close-btn" onclick="closePopup()">×</button>
+        <h2>Special Discount!</h2>
+        <p>Get 20% OFF on your first order.</p>
+        <button class="claim-btn" onclick="closePopup()">Claim Offer</button>
+    </div>
+</div>
+
+
+<script src="script.js"></script>
 </body>
 </html>
